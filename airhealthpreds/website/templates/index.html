@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Air Quality Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Air Quality Prediction</h1>
+
+    <!-- Input form -->
+    <form method="post">
+        {% for feature in features %}
+        <label for="{{ feature }}">{{ feature }}:</label>
+        <input type="text" id="{{ feature }}" name="{{ feature }}" required><br>
+        {% endfor %}
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if predicted_class %}
+    <!-- Prediction results -->
+    <div class="result">
+        <h2>Prediction Results:</h2>
+        <p><b>Predicted Air Quality:</b> {{ predicted_class }}</p>
+        <p><b>Class Probabilities:</b></p>
+        <ul>
+            {% for prob in probabilities %}
+            <li>{{ prob }}</li>
+            {% endfor %}
+        </ul>
+        <h2>Explanation:</h2>
+        <div>{{ explanation_html | safe }}</div>
+    </div>
+    {% endif %}
+</body>
+
+</html>

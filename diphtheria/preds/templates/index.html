@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diphtheria Risk Predictor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      h1 {
+        text-align: center;
+      }
+      form div {
+        margin-bottom: 0.75rem;
+      }
+      label {
+        display: flex;
+        justify-content: space-between;
+      }
+      input[type="number"] {
+        width: 120px;
+        padding: 0.25rem;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+      .result {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+      }
+      .suggestions {
+        margin-top: 1rem;
+      }
+      .suggestions li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Diphtheria Risk Predictor</h1>
+
+    <form method="post">
+      <div>
+        <label
+          >PM2.5: <input type="number" step="any" name="PM2.5" required
+        /></label>
+      </div>
+      <div>
+        <label
+          >PM10: <input type="number" step="any" name="PM10" required
+        /></label>
+      </div>
+      <div>
+        <label
+          >NO₂: <input type="number" step="any" name="NO2" required
+        /></label>
+      </div>
+      <div>
+        <label
+          >SO₂: <input type="number" step="any" name="SO2" required
+        /></label>
+      </div>
+      <div>
+        <label>CO: <input type="number" step="any" name="CO" required /></label>
+      </div>
+      <div>
+        <label>O₃: <input type="number" step="any" name="O3" required /></label>
+      </div>
+      <button type="submit">Predict Risk</button>
+    </form>
+
+    {% if result is not none %}
+    <div class="result">
+      <h2>Risk of Diphtheria: {{ result }}</h2>
+      <div class="suggestions">
+        <h3>Suggestions:</h3>
+        <ul>
+          {% for s in suggestions %}
+          <li>{{ s }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>

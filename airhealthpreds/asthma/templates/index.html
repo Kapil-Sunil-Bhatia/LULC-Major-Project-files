@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asthma Prediction</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a7bc8;
+        }
+
+        @media (min-width: 768px) {
+            form {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Asthma Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="Age">Age:</label>
+                <input type="number" id="Age" name="Age" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender (0: Male, 1: Female):</label>
+                <input type="number" id="Gender" name="Gender" required>
+            </div>
+            <div class="form-group">
+                <label for="Ethnicity">Ethnicity: (0: Caucasian 1: African American 2: Asian 3: Other)</label>
+                <input type="number" id="Ethnicity" name="Ethnicity" required>
+            </div>
+            <div class="form-group">
+                <label for="EducationLevel">Education Level: (0: None 1: High School 2: Bachelor's 3: Higher)</label>
+                <input type="number" id="EducationLevel" name="EducationLevel" required>
+            </div>
+            <div class="form-group">
+                <label for="BMI">BMI: (Body Mass Index of the patients, ranging from 15 to 40.)</label>
+                <input type="number" id="BMI" name="BMI" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="Smoking">Smoking (0: No, 1: Yes):</label>
+                <input type="number" id="Smoking" name="Smoking" required>
+            </div>
+            <div class="form-group">
+                <label for="PhysicalActivity">Physical Activity: (Weekly physical activity in hours, ranging from 0 to
+                    10.)</label>
+                <input type="number" id="PhysicalActivity" name="PhysicalActivity" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="DietQuality">Diet Quality: (Diet quality score, ranging from 0 to 10.)</label>
+                <input type="number" id="DietQuality" name="DietQuality" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="SleepQuality">Sleep Quality: (Sleep quality score, ranging from 4 to 10.)</label>
+                <input type="number" id="SleepQuality" name="SleepQuality" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="PollutionExposure">Pollution Exposure: (Exposure to pollution, score from 0 to 10.)</label>
+                <input type="number" id="PollutionExposure" name="PollutionExposure" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="PollenExposure">Pollen Exposure: (Exposure to pollen, score from 0 to 10.)</label>
+                <input type="number" id="PollenExposure" name="PollenExposure" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="DustExposure">Dust Exposure: (Exposure to dust, score from 0 to 10.)</label>
+                <input type="number" id="DustExposure" name="DustExposure" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="PetAllergy">Pet Allergy (0: No, 1: Yes):</label>
+                <input type="number" id="PetAllergy" name="PetAllergy" required>
+            </div>
+            <div class="form-group">
+                <label for="FamilyHistoryAsthma">Family History of Asthma (0: No, 1: Yes):</label>
+                <input type="number" id="FamilyHistoryAsthma" name="FamilyHistoryAsthma" required>
+            </div>
+            <div class="form-group">
+                <label for="HistoryOfAllergies">History of Allergies (0: No, 1: Yes):</label>
+                <input type="number" id="HistoryOfAllergies" name="HistoryOfAllergies" required>
+            </div>
+            <div class="form-group">
+                <label for="Eczema">Eczema (0: No, 1: Yes):</label>
+                <input type="number" id="Eczema" name="Eczema" required>
+            </div>
+            <div class="form-group">
+                <label for="HayFever">Hay Fever (0: No, 1: Yes):</label>
+                <input type="number" id="HayFever" name="HayFever" required>
+            </div>
+            <div class="form-group">
+                <label for="GastroesophagealReflux">Gastro Reflux (0: No, 1: Yes):</label>
+                <input type="number" id="GastroesophagealReflux" name="GastroesophagealReflux" required>
+            </div>
+            <div class="form-group">
+                <label for="LungFunctionFEV1">Lung Function FEV1: (Forced Expiratory Volume in 1 second (FEV1), ranging
+                    from 1.0 to 4.0 liters.)</label>
+                <input type="number" id="LungFunctionFEV1" name="LungFunctionFEV1" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="LungFunctionFVC">Lung Function FVC: (Forced Vital Capacity (FVC), ranging from 1.5 to 6.0
+                    liters.)</label>
+                <input type="number" id="LungFunctionFVC" name="LungFunctionFVC" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="Wheezing">Wheezing (0: No, 1: Yes):</label>
+                <input type="number" id="Wheezing" name="Wheezing" required>
+            </div>
+            <div class="form-group">
+                <label for="ShortnessOfBreath">Shortness of Breath (0: No, 1: Yes):</label>
+                <input type="number" id="ShortnessOfBreath" name="ShortnessOfBreath" required>
+            </div>
+            <div class="form-group">
+                <label for="ChestTightness">Chest Tightness (0: No, 1: Yes):</label>
+                <input type="number" id="ChestTightness" name="ChestTightness" required>
+            </div>
+            <div class="form-group">
+                <label for="Coughing">Coughing (0: No, 1: Yes):</label>
+                <input type="number" id="Coughing" name="Coughing" required>
+            </div>
+            <div class="form-group">
+                <label for="NighttimeSymptoms">Nighttime Symptoms (0: No, 1: Yes):</label>
+                <input type="number" id="NighttimeSymptoms" name="NighttimeSymptoms" required>
+            </div>
+            <div class="form-group">
+                <label for="ExerciseInduced">Exercise Induced (0: No, 1: Yes):</label>
+                <input type="number" id="ExerciseInduced" name="ExerciseInduced" required>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+
+</html>

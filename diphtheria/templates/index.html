@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diphtheria Prediction</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        text-align: center;
+      }
+      form {
+        margin: 20px auto;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      label,
+      select,
+      input,
+      button {
+        padding: 8px;
+        font-size: 16px;
+      }
+      button {
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Diphtheria Prediction</h1>
+    <form method="post">
+      <label for="year">Select Year:</label>
+      <input type="number" name="year" min="2026" max="2050" required />
+
+      <label for="district">Select District:</label>
+      <select name="district" required>
+        {% for district in districts %}
+        <option value="{{ district }}">{{ district }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="so2">SO₂ Level:</label>
+      <input type="number" step="0.01" name="so2" required />
+
+      <label for="no2">NO₂ Level:</label>
+      <input type="number" step="0.01" name="no2" required />
+
+      <label for="pm10">PM₁₀ Level:</label>
+      <input type="number" step="0.01" name="pm10" required />
+
+      <label for="pm25">PM₂.₅ Level:</label>
+      <input type="number" step="0.01" name="pm25" required />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+  </body>
+</html>
